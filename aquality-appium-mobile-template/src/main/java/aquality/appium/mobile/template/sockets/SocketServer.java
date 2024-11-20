@@ -15,10 +15,50 @@
  */
 package aquality.appium.mobile.template.sockets;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  *
  * @author bjhisel
  */
+
 public class SocketServer {
-    
+    private static final int PORT = 8080;
+    private ServerSocket serverSocket;
+    private ConcurrentHashMap<String, SocketClientHandler> clients;
+
+    public SocketServer() {
+        clients = new ConcurrentHashMap<>();
+    }
+
+    public void start() {
+        try {
+            serverSocket = new ServerSocket(PORT);
+            System.out.println("Servidor Amazon Go Iniciando en el puerto " + PORT + "...");
+
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Nuevo cliente conectado: " + clientSocket.getInetAddress());
+                SocketClientHandler clientHandler = new SocketClientHandler(clientSocket, this);
+                new Thread(clientHandler).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void broadcastUpdate(String message) {
+        clients.values().forEach(client -> client.sendMessage("Mensaje del servidor: " + message));
+    }
+
+    public void addClient(String clientId, SocketClientHandler clientHandler) {
+        clients.put(clientId, clientHandler);
+    }
+
+    public static void main(String[] args) {
+        new SocketServer().start();
+    }
 }

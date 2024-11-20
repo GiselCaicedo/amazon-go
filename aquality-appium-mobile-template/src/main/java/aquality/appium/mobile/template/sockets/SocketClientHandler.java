@@ -19,6 +19,54 @@ package aquality.appium.mobile.template.sockets;
  *
  * @author bjhisel
  */
-public class SocketClientHandler {
-    
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class SocketClientHandler implements Runnable {
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+    private SocketServer server;
+
+    public SocketClientHandler(Socket clientSocket, SocketServer server) {
+        this.clientSocket = clientSocket;
+        this.server = server;
+    }
+
+    @Override
+    public void run() {
+        try {
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            // Leer el identificador del cliente (puedes personalizarlo)
+            String clientId = in.readLine();
+            server.addClient(clientId, this);
+
+            // Procesar mensajes del cliente
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println("Mensaje recibido de " + clientId + ": " + inputLine);
+                out.println("Mensaje recibido: " + inputLine); // Responder al cliente
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void sendMessage(String message) {
+        if (out != null) {
+            out.println(message);
+        }
+    }
 }
