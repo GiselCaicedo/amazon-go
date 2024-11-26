@@ -1,24 +1,77 @@
-/*
- * Copyright 2024 bjhisel.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package aquality.appium.mobile.template.models;
 
-/**
- *
- * @author bjhisel
- */
+import java.util.UUID;
+import java.util.Date;
+
 public class Pedido {
-    
+    private String id;
+    private String clienteId;
+    private String repartidorId;
+    private String estado;
+    private Location ubicacionEntrega;
+    private Location ubicacionActual;
+    private Date fechaCreacion;
+    private double total;
+
+    public Pedido() {
+        this.id = UUID.randomUUID().toString();
+        this.fechaCreacion = new Date();
+        this.estado = "PENDIENTE";
+    }
+
+    public String getId() { 
+        return id; 
+    }
+
+    public String getClienteId() { 
+        return clienteId; 
+    }
+
+    public void setClienteId(String clienteId) { 
+        this.clienteId = clienteId; 
+    }
+
+    public String getRepartidorId() { 
+        return repartidorId; 
+    }
+
+    public void setRepartidorId(String repartidorId) { 
+        this.repartidorId = repartidorId; 
+    }
+
+    public String getEstado() { 
+        return estado; 
+    }
+
+    public void setEstado(String estado) { 
+        this.estado = estado; 
+    }
+
+    public Location getUbicacionEntrega() { 
+        return ubicacionEntrega; 
+    }
+
+    public void setUbicacionEntrega(Location ubicacionEntrega) { 
+        this.ubicacionEntrega = ubicacionEntrega; 
+    }
+
+    public Location getUbicacionActual() { 
+        return ubicacionActual; 
+    }
+
+    public void setUbicacionActual(Location ubicacionActual) { 
+        this.ubicacionActual = ubicacionActual; 
+    }
+
+    public Date getFechaCreacion() { 
+        return fechaCreacion; 
+    }
+
+    public double getTotal() { 
+        return total; 
+    }
+
+    public void setTotal(double total) { 
+        this.total = total; 
+    }
 }

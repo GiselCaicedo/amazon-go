@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="aquality.appium.mobile.template.amazongo.controllers.MainController">
+    
+    <!-- Mapa base -->
+    <WebView fx:id="mapView" />
+    
+    <!-- Panel lateral derecho -->
+    <VBox alignment="TOP_RIGHT" spacing="10">
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
+        
+        <!-- Panel de información del pedido -->
+        <VBox styleClass="order-info-panel" maxWidth="350" spacing="15" 
+              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; 
+                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);">
+            
+            <!-- Título del pedido -->
+            <VBox spacing="5">
+                <Label text="Pedido #JDD23490F" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                <Separator/>
+            </VBox>
+            
+            <!-- Información de entrega -->
+            <VBox spacing="5">
+                <Label text="Entrega Estimada" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                <Label text="12:00 pm" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+            </VBox>
+            
+            <!-- Información del repartidor -->
+            <VBox spacing="5">
+                <Label text="Repartidor" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                <Label text="Juan Pérez" style="-fx-font-size: 16;"/>
+            </VBox>
+            
+            <!-- Estados del pedido -->
+            <VBox spacing="5">
+                <Label text="Estado del pedido" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+                <ListView fx:id="statusList" prefHeight="200" 
+                         style="-fx-background-color: transparent; -fx-background-insets: 0;
+                                -fx-padding: 5; -fx-border-color: transparent;">
+                </ListView>
+            </VBox>
+        </VBox>
+    </VBox>
+    
+    <!-- Barra inferior de navegación -->
+    <HBox alignment="CENTER" spacing="50" 
+          style="-fx-background-color: white; -fx-padding: 15;" 
+          StackPane.alignment="BOTTOM_CENTER">
+        <Button text="Inicio" styleClass="nav-button"/>
+        <Button text="Mapa" styleClass="nav-button"/>
+        <Button text="Perfil" styleClass="nav-button"/>
+    </HBox>
+</StackPane>

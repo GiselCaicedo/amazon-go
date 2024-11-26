@@ -43,15 +43,13 @@ public class SocketClientHandler implements Runnable {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-            // Leer el identificador del cliente (puedes personalizarlo)
             String clientId = in.readLine();
             server.addClient(clientId, this);
 
-            // Procesar mensajes del cliente
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("Mensaje recibido de " + clientId + ": " + inputLine);
-                out.println("Mensaje recibido: " + inputLine); // Responder al cliente
+                System.out.println("Mensaje del cliente " + clientId + ": " + inputLine);
+                out.println("Mensaje recibido: " + inputLine);
             }
         } catch (IOException e) {
             e.printStackTrace();

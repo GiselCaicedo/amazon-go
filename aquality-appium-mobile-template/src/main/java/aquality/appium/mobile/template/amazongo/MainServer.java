@@ -1,28 +1,50 @@
-/*
- * Copyright 2024 bjhisel.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package aquality.appium.mobile.template.amazongo;
 
-import aquality.appium.mobile.template.sockets.SocketServer; 
+import aquality.appium.mobile.template.sockets.SocketServer;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+public class MainServer extends Application {
+    private SocketServer server;
 
-//Punto de entrada para iniciar el servidor de Amazon Go
+    @Override
+    public void start(Stage stage) {
+        try {
+            // Iniciar el servidor en un hilo separado
+            startServer();
+            
+            // Cargar la interfaz principal
+            FXMLLoader fxmlLoader = new FXMLLoader(MainServer.class.getResource("/views/main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
+            
+            // Cargar los estilos CSS
+            scene.getStylesheets().add(getClass().getResource("/styles/styles.css").toExternalForm());
+            
+            stage.setTitle("Sistema de Delivery - Panel de Control");
+            stage.setScene(scene);
+            stage.show();
 
-public class MainServer {
+            // Configurar el cierre de la aplicación
+            stage.setOnCloseRequest(event -> {
+                Platform.exit();
+                System.exit(0);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startServer() {
+        new Thread(() -> {
+            server = new SocketServer();
+            server.start();
+        }).start();
+    }
+
     public static void main(String[] args) {
-        SocketServer server = new SocketServer(); // Crea una instancia del servidor
-        server.start(); // Inicia el servidor
+        launch(args);
     }
 }
