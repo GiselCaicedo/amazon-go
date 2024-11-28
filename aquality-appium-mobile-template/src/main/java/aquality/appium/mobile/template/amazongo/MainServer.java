@@ -17,7 +17,7 @@ public class MainServer extends Application {
             startServer();
             
             // Cargar la interfaz principal
-            FXMLLoader fxmlLoader = new FXMLLoader(MainServer.class.getResource("/views/main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/main-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             
             // Cargar los estilos CSS

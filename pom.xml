@@ -17,11 +17,7 @@
         </license>
     </licenses>
 
-    <modules>
-        <module>aquality-appium-mobile-template</module>
-        <module>aquality-appium-mobile-template-cucumber</module>
-        <module>aquality-appium-mobile-template-testng</module>
-    </modules>
+    <modules></modules>
 
     <properties>
         <aspectj.version>1.9.7</aspectj.version>
