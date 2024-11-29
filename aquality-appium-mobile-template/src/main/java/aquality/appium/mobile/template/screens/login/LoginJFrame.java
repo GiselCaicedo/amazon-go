@@ -25,8 +25,16 @@ public class LoginJFrame extends javax.swing.JFrame {
      * Creates new form LoginJFrame
      */
     public LoginJFrame() {
-        initComponents();
-    }
+    initComponents();
+    
+    // Añadir ActionListener al botón
+    btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnIniciarSesionActionPerformed(evt);
+        }
+    });
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,11 +79,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         lblAMAZONGO.setText("AMAZON GO");
 
         btnIniciarSesion.setText("Iniciar Sesión");
-        btnIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnIniciarSesionMouseClicked(evt);
-            }
-        });
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSesionActionPerformed(evt);
@@ -125,17 +128,17 @@ public class LoginJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -147,16 +150,27 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         // TODO add your handling code here:
+        
+        String Usuario = "admin"; 
+        String Contrasena = "contrasena123";
+        
+        // Obtener la contraseña ingresada como una cadena de texto 
+        String Pass = new String(txtContrasena.getPassword()); 
+        
+        // Verificar si el usuario y la contraseña son correctos 
+        if(txtUsuario.getText().equals(Usuario) && Pass.equals(Contrasena)) { 
+           
+            // Código para cuando el usuario y la contraseña son correctos 
+            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso"); } 
+        else { 
+           
+            // Mostrar un mensaje de error si el usuario o la contraseña son incorrectos 
+            JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaActionPerformed
-
-    private void btnIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesionMouseClicked
-
     /**
      * @param args the command line arguments
      */
